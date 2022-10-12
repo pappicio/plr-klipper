@@ -35,8 +35,6 @@ inserite:
 
   clear_last_file
   
-  SAVE_VARIABLE VARIABLE=was_interrupted VALUE=False
-  
   ################################################################
 
 
