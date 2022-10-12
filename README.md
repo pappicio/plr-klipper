@@ -16,8 +16,6 @@ ma priorio come ultima cosa inserite:
   ############################################################################
 
   save_last_file
-
-  SAVE_VARIABLE VARIABLE=was_interrupted VALUE=True
   
   ############################################################################ 
 
