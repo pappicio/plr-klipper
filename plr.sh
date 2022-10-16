@@ -7,7 +7,12 @@ SD_PATH=/home/pi/gcode_files
 ############################################
 
 cat ${SD_PATH}/${2} > /tmp/plrtmpA.$$
-cat /tmp/plrtmpA.$$ | sed -e '1,/Z'${1}'/ d' | sed -ne '/ Z/,$ p' | grep -m 1 ' Z' | sed -ne 's/.* Z\([^ ]*\)/SET_KINEMATIC_POSITION Z=\1/p' > ${SD_PATH}/plr.gcode
+###sed -n '/; thumbnail begin/, /; thumbnail end/ p' < /tmp/plrtmpA.$$ > ${SD_PATH}/plr.gcode
+sed -n '/;/, /; thumbnail end/ p' < /tmp/plrtmpA.$$ > ${SD_PATH}/plr.gcode
+echo ';' >> ${SD_PATH}/plr.gcode
+echo '' >> ${SD_PATH}/plr.gcode
+/bin/sleep 1
+cat /tmp/plrtmpA.$$ | sed -e '1,/Z'${1}'/ d' | sed -ne '/ Z/,$ p' | grep -m 1 ' Z' | sed -ne 's/.* Z\([^ ]*\)/SET_KINEMATIC_POSITION Z=\1/p' >> ${SD_PATH}/plr.gcode
 echo 'M109 S190.0' >> ${SD_PATH}/plr.gcode
 echo 'G91' >> ${SD_PATH}/plr.gcode
 echo 'G1 Z5' >> ${SD_PATH}/plr.gcode
